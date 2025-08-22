@@ -1664,7 +1664,7 @@ if ($metodoPeticion === 'POST') {
                 $usuarioid = $data['usuarioid'];
                 $usuarionombre = $data['usuarionombre'];
                 $ubigeoid = $data['ubigeoid'];
-                $estadotramite = "INICIADO";
+                $estadotramite = "EN PROCESO";
                 $documento_id = 1;
                 $ubigeoid = 200115;
                 $documento_numexpediente=$data['documento_codexpediente'];
@@ -1764,10 +1764,14 @@ if ($metodoPeticion === 'POST') {
             $anio        = isset($data['f_anio_registro']) ? $data['f_anio_registro'] : null;
             $fechainicio = isset($data['f_fecha_inicio']) ? $data['f_fecha_inicio'] : null;
             $fechafin    = isset($data['f_fecha_fin']) ? $data['f_fecha_fin'] : null;
+            $codigo           = isset($data['f_codigo']) ? $data['f_codigo'] : null;
+            $numero_documento = isset($data['f_numero_documento']) ? $data['f_numero_documento'] : null;
+            $direccion        = isset($data['f_direccion']) ? $data['f_direccion'] : null;
 
-            echo $LicenciaController->getLicencias_filtros_licenciasEmitidas($estado, $mes, $anio, $fechainicio, $fechafin, $categoria);
+            echo $LicenciaController->getLicencias_filtros_licenciasEmitidas($estado, $mes, $anio, $fechainicio, $fechafin, $categoria, $codigo, $numero_documento, $direccion);
 
             break;
+            
         case 'get_tabla_bajas':
 
             $mes         = isset($data['f_mes_registro']) ? $data['f_mes_registro'] : null;

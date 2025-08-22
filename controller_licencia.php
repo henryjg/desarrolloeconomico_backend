@@ -266,8 +266,8 @@ class LicenciaController {
         }
     }
 
-    public function getLicencias_filtros_licenciasEmitidas($estado = null, $mes = null, $anio = null, $fechainicio = null, $fechafin = null, $categoria = null) {
-        $query = "SELECT * FROM licencia_listartabla_filtro_full_emision(?, ?, ?, ?, ?, ?)
+    public function getLicencias_filtros_licenciasEmitidas($estado = null, $mes = null, $anio = null, $fechainicio = null, $fechafin = null, $categoria = null, $codigo = null, $numero_documento = null, $direccion = null) {
+        $query = "SELECT * FROM licencia_listartabla_filtro_full_emision(?, ?, ?, ?, ?, ?, ?, ?, ?)
                          ORDER BY certificado_numerosequencia desc";
         
         // $params = [$estado, $mes, $anio, $fechainicio, $fechafin];
@@ -309,7 +309,25 @@ class LicenciaController {
         } else {
             $filters[] = null;
         }
-    
+
+        if (!is_null($codigo) && $codigo !== '') {
+        $filters[] = $codigo;
+        } else {
+            $filters[] = null;
+        }
+        
+        if (!is_null($numero_documento) && $numero_documento !== '') {
+            $filters[] = $numero_documento;
+        } else {
+            $filters[] = null;
+        }
+        
+        if (!is_null($direccion) && $direccion !== '') {
+            $filters[] = $direccion;
+        } else {
+            $filters[] = null;
+        }
+        
         try {
             // Ejecuta la consulta con los parámetros
             $result = $this->database->ejecutarConsulta($query, $filters);
